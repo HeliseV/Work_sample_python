@@ -12,6 +12,8 @@ class VideoPlayer:
         self.is_playing = False
         self.is_paused = False
         self.currently_playing = "None"
+        self.playlist_id = 0
+        self.playlist_list = []
 
     def Video_Name(self, video_id):
         video = self._video_library.get_video(video_id)
@@ -133,7 +135,20 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("create_playlist needs implementation")
+        try:
+
+            used = 0
+            for x in range(0, len(self.playlist_list)):
+                if self.playlist_list[x] == playlist_name:
+                    used += 1
+            if used == 0:
+                self.playlist_list.append(playlist_name)
+                print(f"Successfully created a new playlist: {playlist_name}")
+            else:
+                print("Cannot create playlist:  A playlist with the same name already exists")
+        except:
+            print("create_playlist needs implementation")
+
 
     def add_to_playlist(self, playlist_name, video_id):
         """Adds a video to a playlist with a given name.
